@@ -52,12 +52,17 @@ error_val   = zeros(m, 1);
 %
 
 % ---------------------- Sample Solution ----------------------
+n = size(Xval, 1)
 
+for i = 1:m
+    Xtrain = X(1:i,:);
+    ytrain = y(1:i);
 
+    theta = trainLinearReg(Xtrain, ytrain, lambda);
 
-
-
-
+    error_train(i) = (1/(2*size(Xtrain,1)))*sum((Xtrain*theta-ytrain).^2);
+    error_val(i) = (1/(2*n))*sum((Xval*theta-yval).^2);
+end
 
 % -------------------------------------------------------------
 

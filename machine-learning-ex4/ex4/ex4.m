@@ -169,7 +169,7 @@ fprintf(['\n\nCost at (fixed) debugging parameters (w/ lambda = %f): %f ' ...
          '\n(for lambda = 3, this value should be about 0.576051)\n\n'], lambda, debug_J);
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+pause(1);
 
 
 %% =================== Part 8: Training NN ===================
@@ -206,7 +206,7 @@ Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):en
                  num_labels, (hidden_layer_size + 1));
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+pause(1);
 
 
 %% ================= Part 9: Visualize Weights =================
@@ -219,7 +219,7 @@ fprintf('\nVisualizing Neural Network... \n')
 displayData(Theta1(:, 2:end));
 
 fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+pause(1);
 
 %% ================= Part 10: Implement Predict =================
 %  After training the neural network, we would like to use it to predict
