@@ -62,25 +62,30 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+a_1 = [ones(m, 1) X];
+z_2 = a_1*Theta1';
+a_2 = [ones(m, 1) sigmoid(z_2)];
+z_3 = a_2*Theta2';
+a_3 = sigmoid(z_3); % no need to extend with ones as this is our output layer.
 
+hypotesis = a_3;
 
+y_vec = zeros(m,num_labels);
+for i = 1:m
+    y_vec(i,y(i)) = 1;
+end
 
+J = (1/m) * sum(sum((-y_vec.*log(hypotesis))-((1-y_vec).*log(1-hypotesis))));
+J += (lambda/(2*m))*(sum(sum(Theta1(:,2:end).^2))+sum(sum(Theta2(:,2:end).^2)));
 
+delta_3 = a_3 - y_vec;
+delta_2 = (Theta2' * delta_3') .* [ones(m,1) sigmoidGradient(z_2)]';
 
+Delta_2 = delta_3'*a_2;
+Delta_1 = delta_2(2:end,:)*a_1;
 
-
-
-
-
-
-
-
-
-
-
-
-
-% -------------------------------------------------------------
+Theta1_grad = (1/m)*Delta_1 + (lambda/m)*[zeros(size(Theta1)(1), 1) Theta1(:,2:end)];
+Theta2_grad = (1/m)*Delta_2 + (lambda/m)*[zeros(size(Theta2)(1), 1) Theta2(:,2:end)];
 
 % =========================================================================
 
